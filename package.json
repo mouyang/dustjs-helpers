@@ -38,7 +38,7 @@
     }
   ],
   "scripts": {
-    "test" : "node test/jasmine-test/server/specRunner.js && node test/jasmine-test/server/specRunner2.js", 
+    "test" : "node test/jasmine-test/server/specRunner.js", 
     "start": "node src/build.js"
   },
   "main": "./lib/dust-helpers",
