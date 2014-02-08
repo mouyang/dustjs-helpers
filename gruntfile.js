@@ -108,7 +108,7 @@ module.exports = function (grunt) {
         options: {
           keepRunner: false,
           specs:   ['<%=paths.test%>/testUtils.js', '<%=paths.testSpecs%>/renderTestSpec.js'],
-          helpers: ['<%=paths.testSpecs%>/helpersTests.js', '<%=paths.testSpecs%>/ifTests.js'],
+          helpers: ['<%=paths.testSpecs%>/*Tests.js'],
           vendor:  ['<%=paths.dust%>'],
           template: require('grunt-template-jasmine-istanbul'),
           templateOptions: {
