@@ -2,7 +2,9 @@ var uutest    = require('./uutest'),
   helpersTests     = require('./jasmine-test/spec/helpersTests'),
   coreSetup = require('./core').coreSetup;
 
-helpersTests.concat(require('./jasmine-test/spec/ifTests'));
+for (var helperIds = ['if'], i = helperIds.length; --i >= 0; ) {
+	helpersTests.concat(require('./jasmine-test/spec/' + helperIds[i] + 'Tests'));
+}
 
 dust  = require('../lib/dust-helpers');
 
