@@ -2,6 +2,8 @@ var uutest    = require('./uutest'),
   helpersTests     = require('./jasmine-test/spec/helpersTests'),
   coreSetup = require('./core').coreSetup;
 
+helpersTests.concat(require('./jasmine-test/spec/ifTests'));
+
 dust  = require('../lib/dust-helpers');
 
 //Add the tapper helper to test the Tap helper.

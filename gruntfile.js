@@ -15,6 +15,8 @@ module.exports = function (grunt) {
       build:            '<%=paths.project%>/tmp',
       helpers:          '<%=paths.build%>/dust-helpers.js',
       helpersMin:       '<%=paths.build%>/dust-helpers.min.js',
+      ifHelper:         '<%=paths.build%>/if.js',
+      ifHelperMin:      '<%=paths.build%>/if.min.js',
       test:             '<%=paths.project%>/test',
       testSpecs:        '<%=paths.test%>/jasmine-test/spec',
       dust:             '<%=paths.project%>/node_modules/dustjs-linkedin/dist/dust-full.min.js',
@@ -40,13 +42,26 @@ module.exports = function (grunt) {
     },
     copy : {
       build : {
-        src:  '<%=paths.lib%>/dust-helpers.js',
-        dest: '<%=paths.helpers%>',
-        options: {
-          process: function (content, srcpath) {
-            return grunt.template.process('<%= banner %>') + content;
+        files : [
+          {
+            src:  '<%=paths.lib%>/dust-helpers.js',
+            dest: '<%=paths.helpers%>',
+            options: {
+              process: function (content, srcpath) {
+                return grunt.template.process('<%= banner %>') + content;
+              }
+            }
+          },
+          {
+            src:  '<%=paths.lib%>/if.js',
+            dest: '<%=paths.ifHelperMin%>',
+            options: {
+              process: function (content, srcpath) {
+                return grunt.template.process('<%= banner %>') + content;
+              }
+            }
           }
-        }
+        ]
       },
       release : {
         files : [
@@ -57,6 +72,14 @@ module.exports = function (grunt) {
           {
             src : '<%=paths.helpersMin%>',
             dest : '<%=paths.dist%>/dust-helpers.min.js'
+          },
+          {
+            src : '<%=paths.ifHelper%>',
+            dest : '<%=paths.dist%>/dust-if-helper.js'
+          },
+          {
+            src : '<%=paths.ifHelperMin%>',
+            dest : '<%=paths.dist%>/dust-if-helper.min.js'
           },
           {
             src : 'LICENSE',
@@ -74,17 +97,18 @@ module.exports = function (grunt) {
       },
       build: {
         files : {
-          '<%=paths.helpersMin%>' : ['<%=paths.helpers%>']
+          '<%=paths.helpersMin%>' : ['<%=paths.helpers%>'], 
+          '<%=paths.ifHelperMin%>' : ['<%=paths.ifHelperMin%>']
         }
       }
     },
     jasmine : {
       allTests : {
-        src : '<%=paths.helpersMin%>',
+        src : ['<%=paths.helpersMin%>', '<%=paths.ifHelperMin%>'],
         options: {
           keepRunner: false,
           specs:   ['<%=paths.test%>/testUtils.js', '<%=paths.testSpecs%>/renderTestSpec.js'],
-          helpers: ['<%=paths.testSpecs%>/helpersTests.js'],
+          helpers: ['<%=paths.testSpecs%>/helpersTests.js', '<%=paths.testSpecs%>/ifTests.js'],
           vendor:  ['<%=paths.dust%>'],
           template: require('grunt-template-jasmine-istanbul'),
           templateOptions: {
