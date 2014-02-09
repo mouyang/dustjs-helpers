@@ -1,9 +1,10 @@
 var uutest    = require('./uutest'),
   helpersTests     = require('./jasmine-test/spec/helpersTests'),
-  coreSetup = require('./core').coreSetup;
+  coreSetup = require('./core').coreSetup, 
+  helperIds = ['if'];
 
-for (var helperIds = ['if'], i = helperIds.length; --i >= 0; ) {
-	helpersTests.concat(require('./jasmine-test/spec/' + helperIds[i] + 'Tests'));
+for (var i = helperIds.length; --i >= 0; ) {
+	helpersTests = helpersTests.concat(require('./jasmine-test/spec/' + helperIds[i] + 'Tests'));
 }
 
 dust  = require('../lib/dust-helpers');
@@ -12,6 +13,10 @@ dust  = require('../lib/dust-helpers');
 testUtils = require("./testUtils");
 for(key in testUtils) {
   dust.helpers[key] = testUtils[key];
+}
+
+for (var i = helperIds.length; --i >= 0; ) {
+  require('../lib/' + helperIds[i]);
 }
 
 function dumpError(err) {
