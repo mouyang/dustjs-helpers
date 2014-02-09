@@ -15,10 +15,6 @@ for(key in testUtils) {
   dust.helpers[key] = testUtils[key];
 }
 
-for (var i = helperIds.length; --i >= 0; ) {
-  require('../lib/' + helperIds[i]);
-}
-
 function dumpError(err) {
   var out = err.testName + " -> ";
   if (!err.message) {
