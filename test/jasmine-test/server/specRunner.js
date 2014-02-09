@@ -1,10 +1,14 @@
 var jasmine = require('jasmine-node'),
   sys = require('util'),
-  path = require('path');
+  path = require('path'),
+  helperIds = ['if'];
 
 //This should be declared global in order to access them in the spec
 dust = require('dustjs-linkedin');
 dust.helpers = require("../../../lib/dust-helpers").helpers;
+for (var i = helperIds.length; --i >= 0; ) {
+  require('../../../lib/' + helperIds[i]);
+}
 
 //Add the tapper helper to test the Tap helper.
 testUtils = require("../../../test/testUtils");
@@ -14,6 +18,9 @@ for(key in testUtils) {
 
 //Get unit test specs
 helpersTests = require('../spec/helpersTests');
+for (var i = helperIds.length; --i >= 0; ) {
+  helpersTests = helpersTests.concat(require('../spec/' + helperIds[i] + 'Tests'));
+}
 
 for(key in jasmine) {
   global[key] = jasmine[key];
