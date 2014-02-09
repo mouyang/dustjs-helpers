@@ -38,8 +38,10 @@ var requiredFiles = [
     'node_modules/grunt-contrib-jasmine/vendor/jasmine-1.3.1/jasmine.js',
     'node_modules/dustjs-linkedin/dist/dust-full.min.js',
     'tmp/dust-helpers.min.js',
+    'tmp/if.min.js',
     'test/testUtils.js',
     'test/jasmine-test/spec/helpersTests.js',
+    'test/jasmine-test/spec/ifTests.js',
     'test/jasmine-test/spec/renderTestSpec.js'
   ];
 
